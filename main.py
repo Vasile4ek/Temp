@@ -61,10 +61,7 @@ def recognize(file):
                 process.terminate()
                 process.kill()
                 break
-            if rec.AcceptWaveform(data):
-                temp = json.loads(rec.Result()).get('text', '')
-                if temp.strip():
-                    f.write(f'{temp}\n')
+            rec.AcceptWaveform(data)
 
         f.write(json.loads(rec.FinalResult()).get('text', ''))
 
@@ -79,10 +76,7 @@ def recognize_wave(file):
             data = wf.readframes(4000)
             if len(data) == 0:
                 break
-            if rec.AcceptWaveform(data):
-                temp = json.loads(rec.Result()).get('text', '')
-                if temp.strip():
-                    f.write(f'{temp}\n')
+            rec.AcceptWaveform(data)
 
         f.write(json.loads(rec.FinalResult()).get('text', ''))
 
